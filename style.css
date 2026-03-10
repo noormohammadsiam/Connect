@@ -766,6 +766,8 @@
         .grid-social-item.tb:hover .icon-box { color: #35465C; border-color: #35465C; background: rgba(53, 70, 92, 0.1); box-shadow: 0 10px 25px rgba(53, 70, 92, 0.2); }
         .grid-social-item.tk:hover { color: #fe2c55; }
         .grid-social-item.tk:hover .icon-box { color: #fe2c55; border-color: #fe2c55; background: rgba(254, 44, 85, 0.1); box-shadow: 0 10px 25px rgba(254, 44, 85, 0.2); }
+        .grid-social-item.md:hover { color: var(--text-main); }
+        .grid-social-item.md:hover .icon-box { color: var(--text-main); border-color: var(--text-main); background: var(--surface-hover); box-shadow: 0 10px 25px var(--shadow-color); }
 
         .grid-social-item span { font-size: 13px; font-weight: 500; letter-spacing: 0.3px; }
 

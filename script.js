@@ -133,84 +133,84 @@
             e.preventDefault();
         
             const contact = {
-                // 1️⃣ Basic Information
                 firstName: "Noor Mohammad",
                 lastName: "Siam",
                 fullName: "Noor Mohammad Siam",
                 nickname: "Siam",
                 alternativeName: "N M Siam",
-        
-                // 2️⃣ Contact Information
                 phones: ["+8801560049454", "+8801708712025"],
+                whatsapp: "+8801560049454",
                 email: "hello@noormohammadsiam.com",
                 fax: "",
-        
-                // 3️⃣ Address
                 street: "Mozammal Hoque Market, Bhaukshar Bazar",
                 city: "Cumilla",
                 postalCode: "3500",
                 state: "Chittagong Division",
                 country: "Bangladesh",
-        
-                // 4️⃣ Professional Information
                 organization: "Mozammal Hoque Group",
                 department: "Leadership",
                 jobTitle: "CEO & Managing Director",
-        
-                // 5️⃣ Online Information
                 website: "https://noormohammadsiam.com",
                 facebook: "https://facebook.com/noormohammadsiam8",
                 linkedin: "https://linkedin.com/in/noormohammadsiam",
-        
-                // 6️⃣ Personal Information
-                birthday: "2006-12-15", // Format: YYYY-MM-DD
+                birthday: "2006-12-15",
                 gender: "Male",
-        
-                // 7️⃣ Photo & Logo URL
                 photoUrl: "https://noormohammadsiam.com/me.jpg",
                 logoUrl: "https://nmsiam-bd.github.io/assets/logo.webp",
-        
-                // 8️⃣ Extra Information
-                notes: "This is a custom note about the contact."
+                notes: "Founder & CEO | Tech Blogger | Entrepreneur"
             };
         
-            // Constructing the vCard string
-            let vcard = "BEGIN:VCARD\n" +
-                        "VERSION:3.0\n" +
-                        `FN:${contact.fullName}\n` +
-                        `N:${contact.lastName};${contact.firstName};;;\n` +
-                        `NICKNAME:${contact.nickname},${contact.alternativeName}\n` +
-                        `ORG:${contact.organization};${contact.department}\n` +
-                        `TITLE:${contact.jobTitle}\n`;
+            let vcard = "BEGIN:VCARD\n";
+            vcard += "VERSION:4.0\n";
+            vcard += `FN:${contact.fullName}\n`;
+            vcard += `N:${contact.lastName};${contact.firstName};;;\n`;
+            vcard += `NICKNAME:${contact.nickname},${contact.alternativeName}\n`;
+            vcard += `ORG:${contact.organization};${contact.department}\n`;
+            vcard += `TITLE:${contact.jobTitle}\n`;
         
-            // Photo & Logo URLs
+            // Photo & Logo
             if (contact.photoUrl) vcard += `PHOTO;VALUE=URI:${contact.photoUrl}\n`;
             if (contact.logoUrl) vcard += `LOGO;VALUE=URI:${contact.logoUrl}\n`;
         
             // Phones
             contact.phones.forEach(phone => {
-                vcard += `TEL;TYPE=CELL,VOICE:${phone}\n`;
+                vcard += `TEL;TYPE=cell,voice:${phone}\n`;
             });
         
-            // Fax
-            if (contact.fax) vcard += `TEL;TYPE=FAX:${contact.fax}\n`;
+            // WhatsApp
+            if (contact.whatsapp) {
+                vcard += `IMPP;X-SERVICE-TYPE=WhatsApp:https://wa.me/${contact.whatsapp.replace(/\+/g,"")}\n`;
+            }
         
-            vcard += `EMAIL;TYPE=INTERNET,WORK:${contact.email}\n` +
-                     `ADR;TYPE=WORK:;;${contact.street};${contact.city};${contact.postalCode};${contact.state};${contact.country}\n` +
-                     `URL:${contact.website}\n` +
-                     `X-SOCIALPROFILE;TYPE=facebook:${contact.facebook}\n` +
-                     `X-SOCIALPROFILE;TYPE=linkedin:${contact.linkedin}\n` +
-                     `BDAY:${contact.birthday.replace(/-/g, "")}\n` +
-                     `NOTE:${contact.notes}\n` +
-                     `X-GENDER:${contact.gender}\n` +
-                     "END:VCARD";
+            // Fax
+            if (contact.fax) vcard += `TEL;TYPE=fax:${contact.fax}\n`;
+        
+            // Email
+            vcard += `EMAIL;TYPE=internet,work:${contact.email}\n`;
+        
+            // Address
+            vcard += `ADR;TYPE=work:;;${contact.street};${contact.city};${contact.state};${contact.postalCode};${contact.country}\n`;
+        
+            // Website
+            vcard += `URL:${contact.website}\n`;
+        
+            // Social Links (Facebook, LinkedIn)
+            vcard += `IMPP;X-SERVICE-TYPE=facebook:${contact.facebook}\n`;
+            vcard += `IMPP;X-SERVICE-TYPE=linkedin:${contact.linkedin}\n`;
+        
+            // Birthday, Gender, Notes
+            vcard += `BDAY:${contact.birthday.replace(/-/g,"")}\n`;
+            vcard += `X-GENDER:${contact.gender}\n`;
+            vcard += `NOTE:${contact.notes}\n`;
+        
+            vcard += "END:VCARD";
         
             // Create Blob and Download
             const blob = new Blob([vcard], { type: "text/vcard" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = `${contact.fullName.replace(/ /g, "_")}.vcf`;
+            a.download = `${contact.fullName.replace(/ /g,"_")}_Advanced.vcf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

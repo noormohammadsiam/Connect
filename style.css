@@ -446,7 +446,7 @@
         .bento-web:hover { border-color: rgba(245, 158, 11, 0.5); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15); color: #f59e0b;}
 
         .action-buttons-container {
-            padding-top: 10px; /* Added */
+            margin-top: 10px; /* Added */
             margin-bottom: 32px;
         }
 

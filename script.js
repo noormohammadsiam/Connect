@@ -129,7 +129,7 @@
         }
 
         // --- Save Advanced vCard with Multiple Websites/Social Links ---
-        function saveAdvancedVCard(e) {
+        function saveContact(e) {
             e.preventDefault();
         
             const contact = {

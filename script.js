@@ -146,7 +146,7 @@
                 fax: "",
         
                 // 3️⃣ Address
-                street: "Bhaukshar Bazar, Mozammal Hoque Market",
+                street: "Mozammal Hoque Market, Bhaukshar Bazar",
                 city: "Cumilla",
                 postalCode: "3500",
                 state: "Chittagong Division",

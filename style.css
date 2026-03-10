@@ -164,8 +164,6 @@
                 display: flex;
                 flex-direction: column;
                 overflow-y: auto;
-                padding-top: 15px; /* Added */
-                padding-bottom: 15px; /* Added */
                 padding-right: 15px; 
                 scrollbar-width: thin;
                 scrollbar-color: var(--surface-hover) transparent;
@@ -176,11 +174,6 @@
             .profile-right::after {
                 content: '';
                 margin: auto;
-            }
-                
-           .profile-right::before {
-                min-height: 5px;
-                flex-shrink: 0;
             }
 
             /* Custom Webkit Scrollbar for right side */

@@ -154,7 +154,7 @@
                 gender: "Male",
                 photoUrl: "https://noormohammadsiam.com/me.jpg",
                 logoUrl: "https://nmsiam-bd.github.io/assets/logo.webp",
-                notes: "Founder & CEO | Tech Blogger | Entrepreneur",
+                notes: "Founder & CEO | Tech Blogger | Entrepreneur, https://nmsiam.com.bd",
                 // Multiple websites/social links with custom names
                 websites: [
                     { name: "Personal Website", url: "https://noormohammadsiam.com" },

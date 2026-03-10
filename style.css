@@ -165,8 +165,6 @@
                 flex-direction: column;
                 overflow-y: auto;
                 padding-right: 15px; 
-                padding-top: 10px; /* Added */
-                padding-bottom: 10px; /* Added */
                 scrollbar-width: thin;
                 scrollbar-color: var(--surface-hover) transparent;
             }

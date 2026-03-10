@@ -449,6 +449,7 @@
 
         .action-buttons-container {
             margin-bottom: 32px;
+            padding-top: 10px; /* Added */
         }
 
         /* Segmented Control / Tabs */

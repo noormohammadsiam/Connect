@@ -164,8 +164,8 @@
                 display: flex;
                 flex-direction: column;
                 overflow-y: auto;
-                padding-top: 6px; /* Added */
-                padding-bottom: 6px; /* Added */
+                padding-top: 15px; /* Added */
+                padding-bottom: 15px; /* Added */
                 padding-right: 15px; 
                 scrollbar-width: thin;
                 scrollbar-color: var(--surface-hover) transparent;
@@ -450,6 +450,8 @@
         .action-buttons-container {
             margin-bottom: 32px;
             padding-top: 10px; /* Added */
+            padding-left: 4px; /* Added */ 
+            padding-right: 4px; /* Added */
         }
 
         /* Segmented Control / Tabs */

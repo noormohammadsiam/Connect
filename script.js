@@ -146,10 +146,10 @@
                 fax: "",
         
                 // 3️⃣ Address
-                street: "Bhaukshar Bazar, Mozammal Hoque Market,",
-                city: "Cumilla,",
-                postalCode: "3500,",
-                state: "Chittagong Division,",
+                street: "Bhaukshar Bazar, Mozammal Hoque Market",
+                city: "Cumilla",
+                postalCode: "3500",
+                state: "Chittagong Division",
                 country: "Bangladesh",
         
                 // 4️⃣ Professional Information
@@ -165,11 +165,13 @@
                 // 6️⃣ Personal Information
                 birthday: "2006-12-15", // Format: YYYY-MM-DD
                 gender: "Male",
-                photoUrl: "",
         
-                // 7️⃣ Extra Information
-                notes: "This is a custom note about the contact.",
-                logoUrl: ""
+                // 7️⃣ Photo & Logo URL
+                photoUrl: "https://noormohammadsiam.com/me.jpg",
+                logoUrl: "https://nmsiam-bd.github.io/assets/logo.webp",
+        
+                // 8️⃣ Extra Information
+                notes: "This is a custom note about the contact."
             };
         
             // Constructing the vCard string
@@ -181,14 +183,20 @@
                         `ORG:${contact.organization};${contact.department}\n` +
                         `TITLE:${contact.jobTitle}\n`;
         
-            // Adding multiple phone numbers
+            // Photo & Logo URLs
+            if (contact.photoUrl) vcard += `PHOTO;VALUE=URI:${contact.photoUrl}\n`;
+            if (contact.logoUrl) vcard += `LOGO;VALUE=URI:${contact.logoUrl}\n`;
+        
+            // Phones
             contact.phones.forEach(phone => {
                 vcard += `TEL;TYPE=CELL,VOICE:${phone}\n`;
             });
         
-            vcard += `TEL;TYPE=FAX:${contact.fax}\n` +
-                     `EMAIL;TYPE=INTERNET,WORK:${contact.email}\n` +
-                     `ADR;TYPE=WORK:;;${contact.street};${contact.city};${contact.state};${contact.postalCode};${contact.country}\n` +
+            // Fax
+            if (contact.fax) vcard += `TEL;TYPE=FAX:${contact.fax}\n`;
+        
+            vcard += `EMAIL;TYPE=INTERNET,WORK:${contact.email}\n` +
+                     `ADR;TYPE=WORK:;;${contact.street};${contact.city};${contact.postalCode};${contact.state};${contact.country}\n` +
                      `URL:${contact.website}\n` +
                      `X-SOCIALPROFILE;TYPE=facebook:${contact.facebook}\n` +
                      `X-SOCIALPROFILE;TYPE=linkedin:${contact.linkedin}\n` +

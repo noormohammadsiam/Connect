@@ -128,8 +128,8 @@
             }
         }
 
-        // --- Save Contact (.vcf) Feature ---
-        function saveContact(e) {
+        // --- Save Advanced vCard with Multiple Websites/Social Links ---
+        function saveAdvancedVCard(e) {
             e.preventDefault();
         
             const contact = {
@@ -150,18 +150,22 @@
                 organization: "Mozammal Hoque Group",
                 department: "Leadership",
                 jobTitle: "CEO & Managing Director",
-                website: "https://noormohammadsiam.com",
-                facebook: "https://facebook.com/noormohammadsiam8",
-                linkedin: "https://linkedin.com/in/noormohammadsiam",
                 birthday: "2006-12-15",
                 gender: "Male",
                 photoUrl: "https://noormohammadsiam.com/me.jpg",
                 logoUrl: "https://nmsiam-bd.github.io/assets/logo.webp",
-                notes: "Founder & CEO | Tech Blogger | Entrepreneur"
+                notes: "Founder & CEO | Tech Blogger | Entrepreneur",
+                // Multiple websites/social links with custom names
+                websites: [
+                    { name: "Personal Website", url: "https://noormohammadsiam.com" },
+                    { name: "Facebook", url: "https://facebook.com/noormohammadsiam8" },
+                    { name: "Instagram", url: "https://instagram.com/noormohammadsiam" },
+                    { name: "X", url: "https://x.com/noormohammadsiam" },
+                    { name: "LinkedIn", url: "https://linkedin.com/in/noormohammadsiam" }
+                ]
             };
         
-            let vcard = "BEGIN:VCARD\n";
-            vcard += "VERSION:4.0\n";
+            let vcard = "BEGIN:VCARD\nVERSION:4.0\n";
             vcard += `FN:${contact.fullName}\n`;
             vcard += `N:${contact.lastName};${contact.firstName};;;\n`;
             vcard += `NICKNAME:${contact.nickname},${contact.alternativeName}\n`;
@@ -191,12 +195,15 @@
             // Address
             vcard += `ADR;TYPE=work:;;${contact.street};${contact.city};${contact.state};${contact.postalCode};${contact.country}\n`;
         
-            // Website
-            vcard += `URL:${contact.website}\n`;
-        
-            // Social Links (Facebook, LinkedIn)
-            vcard += `IMPP;X-SERVICE-TYPE=facebook:${contact.facebook}\n`;
-            vcard += `IMPP;X-SERVICE-TYPE=linkedin:${contact.linkedin}\n`;
+            // Websites / Social Links
+            contact.websites.forEach(site => {
+                // IMPP is used for social profiles; URL for websites
+                if (["Facebook","Instagram","X","LinkedIn","WhatsApp"].includes(site.name)) {
+                    vcard += `IMPP;X-SERVICE-TYPE=${site.name}:${site.url}\n`;
+                } else {
+                    vcard += `URL;TYPE=${site.name}:${site.url}\n`;
+                }
+            });
         
             // Birthday, Gender, Notes
             vcard += `BDAY:${contact.birthday.replace(/-/g,"")}\n`;
@@ -210,7 +217,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = `${contact.fullName.replace(/ /g,"_")}_Advanced.vcf`;
+            a.download = `${contact.fullName.replace(/ /g,"_")}_Full.vcf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

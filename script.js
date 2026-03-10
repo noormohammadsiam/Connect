@@ -128,38 +128,55 @@
             }
         }
 
+
+
         // --- Save Contact (.vcf) Feature ---
         function saveContact(e) {
             e.preventDefault();
         
+            // 📝 এখানে আপনার নোটটি সুন্দরভাবে সাজানো হয়েছে
+            const noteContent = "CEO & Managing Director at Mozammal Hoque Group.\n\n" +
+                                "Business Focus:\n" +
+                                "\u00A0\u00A0🔹 Entrepreneurship\n" +
+                                "\u00A0\u00A0🔹 Leadership & Management\n" +
+                                "\u00A0\u00A0🔹 Strategic Growth\n\n" +
+                                "--------------------------\n" +
+                                "📍 Office: Mozammal Hoque Market, Cumilla\n" +
+                                "🌐 Portfolio: noormohammadsiam.com";
+        
+            // vCard-এ লাইন ব্রেক এবং কমা সাপোর্ট করানোর জন্য প্রসেসিং
+            const formattedNote = noteContent
+                .replace(/\n/g, "\\n") // নিউ লাইনকে vCard ফরম্যাটে রূপান্তর
+                .replace(/,/g, "\\,"); // কমাকে এস্কেপ করা
+        
             const contact = {
-                // Basic Information
+                // 1️⃣ Basic Information
                 firstName: "Noor Mohammad",
                 lastName: "Siam",
                 fullName: "Noor Mohammad Siam",
                 nickname: "Siam",
                 alternativeName: "N M Siam",
         
-                // Contact Information
+                // 2️⃣ Contact Information (Work & Personal Separate)
                 phoneMobile: "+8801560049454",
                 phoneWork: "+8801700000000",
                 emailPersonal: "hello@noormohammadsiam.com",
                 emailWork: "ceo@mhg.info.bd",
                 fax: "",
         
-                // Address
+                // 3️⃣ Address
                 street: "Mozammal Hoque Market, Bhaukshar Bazar",
                 city: "Cumilla",
                 state: "Chittagong Division",
                 postalCode: "3500",
                 country: "Bangladesh",
         
-                // Professional Information
+                // 4️⃣ Professional Information
                 organization: "Mozammal Hoque Group",
                 department: "Leadership",
                 jobTitle: "CEO & Managing Director",
         
-                // Online Information (Multiple Websites)
+                // 5️⃣ Online Information (Multiple Websites)
                 websites: [
                     "https://noormohammadsiam.com", 
                     "https://nmsiam.com.bd"
@@ -167,10 +184,10 @@
                 facebook: "https://facebook.com/noormohammadsiam8",
                 linkedin: "https://linkedin.com/in/noormohammadsiam",
         
-                // Personal Information
+                // 6️⃣ Personal Information
                 birthday: "2006-12-15", 
                 gender: "Male",
-                notes: "This is a custom note about the contact."
+                notes: formattedNote // ফরম্যাট করা নোটটি এখানে দেওয়া হয়েছে
             };
         
             // Constructing the vCard string
@@ -182,12 +199,12 @@
                         `ORG:${contact.organization};${contact.department}\n` +
                         `TITLE:${contact.jobTitle}\n`;
         
-            // Phone Numbers with Labels (Mobile vs Work)
+            // Phone Numbers with Labels
             vcard += `TEL;TYPE=CELL,VOICE:${contact.phoneMobile}\n`;
             vcard += `TEL;TYPE=WORK,VOICE:${contact.phoneWork}\n`;
-            vcard += `TEL;TYPE=FAX:${contact.fax}\n`;
+            if(contact.fax) vcard += `TEL;TYPE=FAX:${contact.fax}\n`;
         
-            // Emails with Labels (Home vs Work)
+            // Emails with Labels
             vcard += `EMAIL;TYPE=INTERNET,HOME:${contact.emailPersonal}\n`;
             vcard += `EMAIL;TYPE=INTERNET,WORK:${contact.emailWork}\n`;
         
@@ -203,7 +220,7 @@
             vcard += `X-SOCIALPROFILE;TYPE=facebook:${contact.facebook}\n` +
                      `X-SOCIALPROFILE;TYPE=linkedin:${contact.linkedin}\n` +
                      `BDAY:${contact.birthday.replace(/-/g, "")}\n` +
-                     `NOTE:${contact.notes}\n` +
+                     `NOTE:${contact.notes}\n` + // এখানে নোট বসবে
                      `X-GENDER:${contact.gender}\n` +
                      "END:VCARD";
         

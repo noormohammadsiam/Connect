@@ -1,3 +1,6 @@
+        // Auto-update copyright year
+        document.getElementById("copyright-year").textContent = new Date().getFullYear();
+
         // --- Theme Toggle Logic ---
         function toggleTheme() {
             const htmlTag = document.documentElement;
@@ -235,3 +238,22 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
+
+        // --- Auto Sort Social Links Alphabetically ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const socialGrid = document.querySelector('.social-grid');
+            if (socialGrid) {
+                // সব সোশ্যাল আইটেমগুলোকে একটি Array তে নেওয়া
+                const items = Array.from(socialGrid.querySelectorAll('.grid-social-item'));
+                
+                // নাম (A-Z) অনুযায়ী সাজানো
+                items.sort((a, b) => {
+                    const nameA = a.querySelector('span').innerText.toUpperCase();
+                    const nameB = b.querySelector('span').innerText.toUpperCase();
+                    return nameA.localeCompare(nameB);
+                });
+                
+                // সাজানো আইটেমগুলোকে পুনরায় গ্রিডে বসিয়ে দেওয়া
+                items.forEach(item => socialGrid.appendChild(item));
+            }
+        });

@@ -128,96 +128,91 @@
             }
         }
 
-        // --- Save Advanced vCard with Multiple Websites/Social Links ---
+        // --- Save Contact (.vcf) Feature ---
         function saveContact(e) {
             e.preventDefault();
         
             const contact = {
+                // Basic Information
                 firstName: "Noor Mohammad",
                 lastName: "Siam",
                 fullName: "Noor Mohammad Siam",
                 nickname: "Siam",
                 alternativeName: "N M Siam",
-                phones: ["+8801560049454", "+8801708712025"],
-                whatsapp: "+8801560049454",
-                email: "hello@noormohammadsiam.com",
+        
+                // Contact Information
+                phoneMobile: "+8801560049454",
+                phoneWork: "+8801700000000",
+                emailPersonal: "hello@noormohammadsiam.com",
+                emailWork: "ceo@mhg.info.bd",
                 fax: "",
+        
+                // Address
                 street: "Mozammal Hoque Market, Bhaukshar Bazar",
                 city: "Cumilla",
-                postalCode: "3500",
                 state: "Chittagong Division",
+                postalCode: "3500",
                 country: "Bangladesh",
+        
+                // Professional Information
                 organization: "Mozammal Hoque Group",
                 department: "Leadership",
                 jobTitle: "CEO & Managing Director",
-                birthday: "2006-12-15",
-                gender: "Male",
-                photoUrl: "https://noormohammadsiam.com/me.jpg",
-                logoUrl: "https://nmsiam-bd.github.io/assets/logo.webp",
-                notes: "Founder & CEO | Tech Blogger | Entrepreneur, https://nmsiam.com.bd",
-                // Multiple websites/social links with custom names
+        
+                // Online Information (Multiple Websites)
                 websites: [
-                    { name: "Personal Website", url: "https://noormohammadsiam.com" },
-                    { name: "Facebook", url: "https://facebook.com/noormohammadsiam8" },
-                    { name: "Instagram", url: "https://instagram.com/noormohammadsiam" },
-                    { name: "X", url: "https://x.com/noormohammadsiam" },
-                    { name: "LinkedIn", url: "https://linkedin.com/in/noormohammadsiam" }
-                ]
+                    "https://noormohammadsiam.com", 
+                    "https://nmsiam.com.bd"
+                ],
+                facebook: "https://facebook.com/noormohammadsiam8",
+                linkedin: "https://linkedin.com/in/noormohammadsiam",
+        
+                // Personal Information
+                birthday: "2006-12-15", 
+                gender: "Male",
+                notes: "This is a custom note about the contact."
             };
         
-            let vcard = "BEGIN:VCARD\nVERSION:4.0\n";
-            vcard += `FN:${contact.fullName}\n`;
-            vcard += `N:${contact.lastName};${contact.firstName};;;\n`;
-            vcard += `NICKNAME:${contact.nickname},${contact.alternativeName}\n`;
-            vcard += `ORG:${contact.organization};${contact.department}\n`;
-            vcard += `TITLE:${contact.jobTitle}\n`;
+            // Constructing the vCard string
+            let vcard = "BEGIN:VCARD\n" +
+                        "VERSION:3.0\n" +
+                        `FN:${contact.fullName}\n` +
+                        `N:${contact.lastName};${contact.firstName};;;\n` +
+                        `NICKNAME:${contact.nickname},${contact.alternativeName}\n` +
+                        `ORG:${contact.organization};${contact.department}\n` +
+                        `TITLE:${contact.jobTitle}\n`;
         
-            // Photo & Logo
-            if (contact.photoUrl) vcard += `PHOTO;VALUE=URI:${contact.photoUrl}\n`;
-            if (contact.logoUrl) vcard += `LOGO;VALUE=URI:${contact.logoUrl}\n`;
+            // Phone Numbers with Labels (Mobile vs Work)
+            vcard += `TEL;TYPE=CELL,VOICE:${contact.phoneMobile}\n`;
+            vcard += `TEL;TYPE=WORK,VOICE:${contact.phoneWork}\n`;
+            vcard += `TEL;TYPE=FAX:${contact.fax}\n`;
         
-            // Phones
-            contact.phones.forEach(phone => {
-                vcard += `TEL;TYPE=cell,voice:${phone}\n`;
-            });
-        
-            // WhatsApp
-            if (contact.whatsapp) {
-                vcard += `IMPP;X-SERVICE-TYPE=WhatsApp:https://wa.me/${contact.whatsapp.replace(/\+/g,"")}\n`;
-            }
-        
-            // Fax
-            if (contact.fax) vcard += `TEL;TYPE=fax:${contact.fax}\n`;
-        
-            // Email
-            vcard += `EMAIL;TYPE=internet,work:${contact.email}\n`;
+            // Emails with Labels (Home vs Work)
+            vcard += `EMAIL;TYPE=INTERNET,HOME:${contact.emailPersonal}\n`;
+            vcard += `EMAIL;TYPE=INTERNET,WORK:${contact.emailWork}\n`;
         
             // Address
-            vcard += `ADR;TYPE=work:;;${contact.street};${contact.city};${contact.state};${contact.postalCode};${contact.country}\n`;
+            vcard += `ADR;TYPE=WORK:;;${contact.street};${contact.city};${contact.state};${contact.postalCode};${contact.country}\n`;
         
-            // Websites / Social Links
+            // Multiple Websites
             contact.websites.forEach(site => {
-                // IMPP is used for social profiles; URL for websites
-                if (["Facebook","Instagram","X","LinkedIn","WhatsApp"].includes(site.name)) {
-                    vcard += `IMPP;X-SERVICE-TYPE=${site.name}:${site.url}\n`;
-                } else {
-                    vcard += `URL;TYPE=${site.name}:${site.url}\n`;
-                }
+                vcard += `URL:${site}\n`;
             });
         
-            // Birthday, Gender, Notes
-            vcard += `BDAY:${contact.birthday.replace(/-/g,"")}\n`;
-            vcard += `X-GENDER:${contact.gender}\n`;
-            vcard += `NOTE:${contact.notes}\n`;
-        
-            vcard += "END:VCARD";
+            // Social & Others
+            vcard += `X-SOCIALPROFILE;TYPE=facebook:${contact.facebook}\n` +
+                     `X-SOCIALPROFILE;TYPE=linkedin:${contact.linkedin}\n` +
+                     `BDAY:${contact.birthday.replace(/-/g, "")}\n` +
+                     `NOTE:${contact.notes}\n` +
+                     `X-GENDER:${contact.gender}\n` +
+                     "END:VCARD";
         
             // Create Blob and Download
             const blob = new Blob([vcard], { type: "text/vcard" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = `${contact.fullName.replace(/ /g,"_")}_Full.vcf`;
+            a.download = `${contact.fullName.replace(/ /g, "_")}.vcf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

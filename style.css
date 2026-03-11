@@ -768,6 +768,10 @@
         .grid-social-item.tk:hover .icon-box { color: #fe2c55; border-color: #fe2c55; background: rgba(254, 44, 85, 0.1); box-shadow: 0 10px 25px rgba(254, 44, 85, 0.2); }
         .grid-social-item.md:hover { color: var(--text-main); }
         .grid-social-item.md:hover .icon-box { color: var(--text-main); border-color: var(--text-main); background: var(--surface-hover); box-shadow: 0 10px 25px var(--shadow-color); }
+        .grid-social-item.ms:hover { color: #00B2FF; }
+        .grid-social-item.ms:hover .icon-box { color: #00B2FF; border-color: #00B2FF; background: rgba(0, 178, 255, 0.1); box-shadow: 0 10px 25px rgba(0, 178, 255, 0.2); }
+        .grid-social-item.bl:hover { color: #FF5722; }
+        .grid-social-item.bl:hover .icon-box { color: #FF5722; border-color: #FF5722; background: rgba(255, 87, 34, 0.1); box-shadow: 0 10px 25px rgba(255, 87, 34, 0.2); }
 
         .grid-social-item span { font-size: 13px; font-weight: 500; letter-spacing: 0.3px; }
 

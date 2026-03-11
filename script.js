@@ -138,14 +138,13 @@
             e.preventDefault();
         
             // 📝 এখানে আপনার নোটটি সুন্দরভাবে সাজানো হয়েছে
-            const noteContent = "CEO & Managing Director at Mozammal Hoque Group.\n\n" +
+            const noteContent = "Entrepreneur | Tech Enthusiast | Community Builder | Digital Contributor | IT Innovator\n\n" +
+                                "About Me:\n" +
+                                "I am Noor Mohammad Siam, a CSE student at Independent University, Bangladesh (IUB) and CEO of Mozammal Hoque Market. I’m passionate about software development, digital strategy, and IT entrepreneurship, and I contribute to Bangla Wikipedia while serving as a Google Maps Local Guide to support open knowledge and digital connectivity.\n\n" +
                                 "Business Focus:\n" +
-                                "\u00A0\u00A0🔹 Entrepreneurship\n" +
-                                "\u00A0\u00A0🔹 Leadership & Management\n" +
-                                "\u00A0\u00A0🔹 Strategic Growth\n\n" +
-                                "--------------------------\n" +
-                                "📍 Office: Mozammal Hoque Market, Cumilla\n" +
-                                "🌐 Portfolio: noormohammadsiam.com";
+                                "\u00A0\u00A0• Entrepreneurship\n" +
+                                "\u00A0\u00A0• Leadership & Management\n" +
+                                "\u00A0\u00A0• Strategic Growth\n\n";
         
             // vCard-এ লাইন ব্রেক এবং কমা সাপোর্ট করানোর জন্য প্রসেসিং
             const formattedNote = noteContent
@@ -162,7 +161,7 @@
         
                 // 2️⃣ Contact Information (Work & Personal Separate)
                 phoneMobile: "+8801560049454",
-                phoneWork: "+8801700000000",
+                phoneWork: "+8809638325600",
                 emailPersonal: "hello@noormohammadsiam.com",
                 emailWork: "ceo@mhg.info.bd",
                 fax: "",
@@ -182,7 +181,9 @@
                 // 5️⃣ Online Information (Multiple Websites)
                 websites: [
                     "https://noormohammadsiam.com", 
-                    "https://nmsiam.com.bd"
+                    "https://nmsiam.com.bd",
+                    "https://www.mozammalhoque-group.com.bd",
+                    "https://facebook.com/noormohammadsiam8"   
                 ],
                 facebook: "https://facebook.com/noormohammadsiam8",
                 linkedin: "https://linkedin.com/in/noormohammadsiam",

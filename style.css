@@ -463,10 +463,21 @@
             margin-bottom: 24px;
             border: 1px solid var(--card-border);
             position: relative;
+            overflow-x: auto;         /* স্ক্রল করার জন্য */
+            scroll-behavior: smooth;  /* স্মুথ স্ক্রলিং */
+            gap: 6px;                 /* বাটনের মাঝে ফাঁকা জায়গা */
+            scrollbar-width: none;    /* Firefox এ স্ক্রলবার লুকানোর জন্য */
+            -ms-overflow-style: none; /* IE এ স্ক্রলবার লুকানোর জন্য */
+        }
+
+        /* Chrome/Safari তে স্ক্রলবার লুকানোর জন্য */
+        .tab-container::-webkit-scrollbar {
+            display: none;
         }
 
         .tab-btn {
-            flex: 1;
+            /* স্ক্রিনে ঠিক ৩টি বাটন দেখানোর মাপ */
+            flex: 0 0 calc((100% - 12px) / 3); 
             padding: 12px 2px;
             background: transparent;
             border: none;
@@ -477,6 +488,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 2;
+            white-space: nowrap; /* লেখা যেন নিচে না ভাঙে */
         }
 
         .tab-btn.active {

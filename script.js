@@ -64,6 +64,16 @@
             }
             document.getElementById(tabName).classList.add("active");
             elmnt.classList.add("active");
+
+            // --- Auto Scroll Tab Menu ---
+            // যে ট্যাবে ক্লিক করা হবে, সেটি অটোমেটিক স্ক্রল হয়ে স্ক্রিনের মাঝে চলে আসবে
+            const container = elmnt.parentElement;
+            const scrollPos = elmnt.offsetLeft - (container.offsetWidth / 2) + (elmnt.offsetWidth / 2);
+            
+            container.scrollTo({
+                left: scrollPos,
+                behavior: 'smooth'
+            });
         }
 
         // --- Share Profile Link Feature ---
